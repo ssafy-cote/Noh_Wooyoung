@@ -1,4 +1,4 @@
-package cote;
+package a0214;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +23,8 @@ import java.util.StringTokenizer;
 0 7 6 2 4 0 0
 0 0 0 0 0 0 0
  
+ 메모리 : 230348kb
+ 시간 : 680ms
  */
 public class 빙하 {
 	
@@ -67,57 +69,68 @@ public class 빙하 {
 		System.out.println(year);
 		
 	}//main
+	
+	
 	private static void melt(int[][] glaciar) {
 		int[][] meltArr = new int[N][M]; //인접 바다가 몇개인지 저장
 		int[][] copyArr = new int[N][M];
 		
+		boolean isAllZero = true;
+		
 		splits = 0;
 		//매 칸 탐색해서
-		for(int i=0; i<N; i++) {
-			for(int j=0; j<M; j++) {
+		for(int i=1; i<N-1; i++) {
+			for(int j=1; j<M-1; j++) {
 				//현재 칸이 0이 아니면
 				if(glaciar[i][j]!=0) {
 					for(int a=0; a<4; a++) {
 						int ny=i+dy[a];
 						int nx=j+dx[a];
-						if(ny<0 || ny>=N || nx<0 || nx>=M) continue;
+//						if(ny<0 || ny>=N || nx<0 || nx>=M) continue; //테두리는 항상 0-> 범위 나갈 일 없음
 						if(glaciar[ny][nx]==0) meltArr[i][j]++;
 					}
-					
 				}
 			}
 		}
+		
+		
+		
 		//녹이기
-		for(int i=0; i<N; i++) {
-			for(int j=0; j<M; j++) {
+		for(int i=1; i<N-1; i++) {
+			for(int j=1; j<M-1; j++) {
 				glaciar[i][j] -= meltArr[i][j];
 				if(glaciar[i][j]<0) glaciar[i][j]=0;
 				copyArr[i][j] = glaciar[i][j]; //녹은 상태 복사 - 원본은 나중에 또 써야됨
+				if(copyArr[i][j]!=0) isAllZero = false;
 			}
+		}
+		
+		if(isAllZero) {
+			year= 0;
+			return;
 		}
 		
 		year+=1;
 		
 		//덩어리찾기
-		A:for(int i=0; i<N; i++) {
-			for(int j=0; j<M; j++) {
+		A:for(int i=1; i<N-1; i++) {
+			for(int j=1; j<M-1; j++) {
 				if(copyArr[i][j] != 0) { //0이 아닌걸 만나면 splits 1증가시키고 bfs해서 붙은 것들 0으로 처리
 					splits += 1; //덩어리 찾았으므로 1증가
 					if(splits>1)break A;
 					queue.offer(new Node(i,j)); //현재 인덱스를 노드로 만들어 큐에 넣기
 					
 					//bfs
-					while(!queue.isEmpty()) {
-						
+					while(!queue.isEmpty()) {						
 						Node current = queue.poll();
 						copyArr[current.y][current.x] = 0;
 						for(int a=0; a<4; a++) {
 							int ny = current.y + dy[a];
 							int nx = current.x + dx[a];
-							if(ny<0 || ny>=N || nx<0 || nx>=M) continue;
+//							if(ny<0 || ny>=N || nx<0 || nx>=M) continue; //범위 나갈 일 없음
 							if(copyArr[ny][nx]!=0) {
-								copyArr[ny][nx] = 0;
-								queue.offer(new Node(ny,nx));
+								copyArr[ny][nx] = 0; //0으로 만들고
+								queue.offer(new Node(ny,nx)); //큐에 넣기
 							}
 						}
 					}
@@ -128,7 +141,7 @@ public class 빙하 {
 		if(splits>1) { //기저조건
 			return;
 		} else {
-			melt(glaciar);
+			melt(glaciar); //덩어리 2개 이상 아니면 재귀
 		}
 	}//melt
 }
