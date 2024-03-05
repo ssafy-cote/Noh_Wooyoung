@@ -4,8 +4,78 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /*
- * 00 , 1
- * 2의 배수 되면 
+ 
+1
+A
+
+2 - 2
+AA
+BB +
+
+3 - 3
+AAA
+BBA
+ABB +
+
+4 - 5
+AAAA
+BBAA
+ABBA
+AABB + 
+BBBB +
+
+5 - 8
+AAAAA
+BBAAA
+ABBAA
+AABBA
+AAABB +
+BBBBA 
+ABBBB +
+BBABB + 
+
+6 - 13
+AAAAAA
+BBAAAA
+ABBAAA
+AABBAA
+AAABBA
+AAAABB + 
+BBBBAA
+ABBBBA
+AABBBB +
+BBAABB + 
+ABBABB +
+BBABBA +
+BBBBBB +
+
+
+7 - 19
+AAAAAAA
+BBAAAAAA
+ABBAAAA
+AABBAAA
+AAABBAA
+AAAABBA
+AAAAABB
+
+BBBBAAA
+ABBBBAA
+AABBBBA
+AAABBBB
+
+BBAAABB -
+ABBAABB -
+AABBABB -
+BBAABBA -
+BBABBAA -
+BBBBBBA 
+BBBBABB
+BBABBBB
+ABBBBBB
+BBBBBBB
+
+결과 피보나치수열나옴
  */
 
 public class 타일0101 {
