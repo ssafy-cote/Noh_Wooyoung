@@ -22,6 +22,7 @@ public class 빗물 {
 다음 0들을 계속 넣음
 1나오면 안에있는 0 개수만큼 누적
 
+[1,0,0] + 1 -> [1], cnt+2
  */
 	static Stack<Integer> stk = new Stack<Integer>();
 	public static void main(String[] args) throws IOException {
