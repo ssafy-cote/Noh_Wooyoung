@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
  다르면 아니다 말하고 종료
  시작>=끝 되면 종료
  시간초과남
+
  */
 public class 펠린드롬 {
 	static int N,S,E,M;
